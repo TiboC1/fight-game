@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Monster Slayer</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <link rel="stylesheet" href="css/foundation.min.css">
+    <link rel="stylesheet" href="css/app.css">
+</head>
+<body>
+<div id="app">
+    <!-- health bar section -->
+    <section class="row">
+        <!-- player health bar -->
+        <div class="small-6 columns">
+            <h1 class="text-center">YOU</h1>
+            <h2 class="text-center">Health</h2>
+            <div class="healthbar">
+                <div class="healthbar text-center bar-display player-health" :style="playerHealth">
+                    {{player.health}}
+                </div>
+            </div>
+        </div>
+        <!-- monster health bar -->
+        <div class="small-6 columns">
+            <h1 class="text-center">MONSTER</h1>
+            <h2 class="text-center">Health</h2>
+            <div class="healthbar">
+                <div class="healthbar text-center bar-display monster-health" :style="monsterHealth">
+                    {{monster.health}}
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- mana bar section -->
+    <section class="row">
+        <div class="small-6 columns">
+            <!-- player mana bar -->
+            <h2 class="text-center">mana</h2>
+            <div class="healthbar">
+                <div class="healthbar text-center bar-display player-mana" :style="playerMana">
+                    {{player.mana}}
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- constrols section -->
+        <!-- gamestate = false -->
+        <section class="row controls" v-if="!gameState">
+            <div class="small-12 columns">
+                <button id="start-game" @click="newGame">START NEW GAME</button>
+            </div>
+        </section>
+
+        <!-- gamestate = true -->
+        <section class="row controls" v-else>
+            <div class="small-12 columns">
+                <button id="attack" @click="playerAttack">ATTACK</button>
+                <button id="special-attack" @click="playerSpecialAttack">SPECIAL ATTACK</button>
+                <button id="heal" @click="playerHeal">HEAL</button>
+                <button id="give-up" @click="defeat">GIVE UP</button>
+            </div>
+        </section>
+
+    <!-- game log -->
+    <section class="row log">
+        <div class="small-12 columns">
+            <h2>Game Log</h2>
+            <ul>
+                <li v-for="item in log" :class="item.style">{{item.description}}</li>
+            </ul>
+        </div>
+    </section>
+</div>
+</body>
+<script src="main.js"></script>
+</html>
